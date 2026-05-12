@@ -56,11 +56,7 @@ export default function App() {
   }, []);
 
   const toggleTodo = useCallback((id: number) => {
-    setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
+    setTodos((prev) => prev.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)));
   }, []);
 
   const clearCompleted = () => {
@@ -97,26 +93,20 @@ export default function App() {
   });
 
   return (
-    <div className="min-h-screen bg-bg flex items-start justify-center px-5 sm:px-6 py-16 sm:py-28">
+    <div className="min-h-screen flex justify-center px-5 sm:px-6 py-16 sm:py-28">
       <div className="w-full max-w-xl">
         {/* Header */}
         <header className="mb-14">
           <div className="flex items-start justify-between mb-8">
             <div>
-              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight font-grotesk text-text">
-                tsk<span className="text-accent">.</span>
+              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight font-grotesk text-zinc-100">
+                tsk<span className="text-indigo-400">.</span>
               </h1>
-              <p className="text-text-muted text-sm font-mono mt-2 tracking-wide">
-                task manager
-              </p>
+              <p className="text-zinc-500 text-sm font-mono mt-2 tracking-wide">task manager</p>
             </div>
             <div className="text-right font-mono">
-              <p className="text-accent text-lg sm:text-xl font-semibold tabular-nums tracking-wider">
-                {formattedTime}
-              </p>
-              <p className="text-text-muted text-xs tracking-wider uppercase mt-1">
-                {formattedDate}
-              </p>
+              <p className="text-indigo-400 text-lg sm:text-xl font-semibold tabular-nums tracking-wider">{formattedTime}</p>
+              <p className="text-zinc-500 text-xs tracking-wider uppercase mt-1">{formattedDate}</p>
             </div>
           </div>
 
@@ -124,20 +114,15 @@ export default function App() {
           {todos.length > 0 && (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-text-muted text-xs font-mono uppercase tracking-widest">
-                  Progress
-                </span>
-                <span className="text-text-muted text-xs font-mono">
-                  <span className="text-accent font-semibold">{completedCount}</span>
-                  <span className="text-text-dim"> / </span>
+                <span className="text-zinc-500 text-xs font-mono uppercase tracking-widest">Progress</span>
+                <span className="text-zinc-500 text-xs font-mono">
+                  <span className="text-indigo-400 font-semibold">{completedCount}</span>
+                  <span className="text-zinc-600"> / </span>
                   {todos.length}
                 </span>
               </div>
-              <div className="h-[3px] bg-border rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-accent rounded-full origin-left transition-transform duration-500 ease-out"
-                  style={{ transform: `scaleX(${progress})` }}
-                />
+              <div className="h-[3px] bg-zinc-800 rounded-full overflow-hidden">
+                <div className="h-full bg-indigo-500 rounded-full origin-left transition-transform duration-500 ease-out" style={{ transform: `scaleX(${progress})` }} />
               </div>
             </div>
           )}
@@ -147,7 +132,7 @@ export default function App() {
         <TodoInput onAddTodo={addTodo} />
 
         {/* Filter Tabs */}
-        <div className="flex items-center gap-1 mt-10 mb-6 border-b border-border">
+        <div className="flex items-center gap-1 mt-10 mb-6 border-b border-zinc-800">
           {filters.map((f) => (
             <button
               key={f.key}
@@ -155,20 +140,13 @@ export default function App() {
               className={`
                 relative px-4 py-2.5 text-xs font-mono uppercase tracking-widest
                 transition-colors duration-200 cursor-pointer
-                ${filter === f.key ? 'text-accent' : 'text-text-dim hover:text-text-muted'}
+                ${filter === f.key ? 'text-indigo-400' : 'text-zinc-400 hover:text-zinc-300'}
               `}
             >
               {f.label}
-              <span
-                className={`ml-1.5 text-[10px] ${filter === f.key ? 'text-accent/60' : 'text-text-dim/60'
-                  }`}
-              >
-                {f.count}
-              </span>
+              <span className={`ml-1.5 text-[10px] ${filter === f.key ? 'text-indigo-400/60' : 'text-zinc-500/60'}`}>{f.count}</span>
               {/* Active indicator */}
-              {filter === f.key && (
-                <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-accent" />
-              )}
+              {filter === f.key && <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-indigo-500" />}
             </button>
           ))}
         </div>
@@ -176,22 +154,15 @@ export default function App() {
         {/* Task List */}
         {filteredTodos.length === 0 ? (
           <div className="py-24 text-center">
-            <p className="text-text-muted font-mono text-sm">
+            <p className="text-zinc-500 font-mono text-sm">
               {filter === 'all' && 'No tasks yet.'}
               {filter === 'active' && 'No active tasks.'}
               {filter === 'done' && 'No completed tasks.'}
             </p>
-            <p className="text-text-dim font-mono text-xs mt-3">
-              {filter === 'all' ? 'Type above to create one.' : 'Switch filters to see tasks.'}
-            </p>
+            <p className="text-zinc-400 font-mono text-xs mt-3">{filter === 'all' ? 'Type above to create one.' : 'Switch filters to see tasks.'}</p>
           </div>
         ) : (
-          <TodoList
-            todos={filteredTodos}
-            onDeleteTodo={deleteTodo}
-            onToggleTodo={toggleTodo}
-            deletingId={deletingId}
-          />
+          <TodoList todos={filteredTodos} onDeleteTodo={deleteTodo} onToggleTodo={toggleTodo} deletingId={deletingId} />
         )}
 
         {/* Footer */}
@@ -199,9 +170,9 @@ export default function App() {
           <div className="mt-8 flex justify-end">
             <button
               onClick={clearCompleted}
-              className="text-text-muted text-xs font-mono uppercase tracking-widest
-                         hover:text-danger transition-colors duration-200 cursor-pointer
-                         py-2 px-3 rounded hover:bg-danger-muted"
+              className="text-zinc-500 text-xs font-mono uppercase tracking-widest
+                         hover:text-red-500 transition-colors duration-200 cursor-pointer
+                         py-2 px-3 rounded hover:bg-red-500/10"
             >
               Clear completed
             </button>
@@ -210,9 +181,7 @@ export default function App() {
 
         {/* Keyboard hint */}
         <div className="mt-16 text-center">
-          <p className="text-text-dim text-[11px] font-mono uppercase tracking-[0.2em]">
-            Press Enter to add • Click to toggle • Hover to delete
-          </p>
+          <p className="text-zinc-600 text-[11px] font-mono uppercase tracking-[0.2em]">Press Enter to add • Click to toggle • Hover to delete</p>
         </div>
       </div>
     </div>

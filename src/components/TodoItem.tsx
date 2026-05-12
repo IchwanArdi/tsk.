@@ -28,9 +28,9 @@ export default function TodoItem({ todo, index, onDelete, onToggle, isDeleting }
     <li
       className={`
         group flex items-center gap-4 px-4 py-4
-        border-b border-border-subtle
+        border-b border-zinc-800/50
         transition-all duration-200
-        hover:bg-surface-hover
+        hover:bg-zinc-900/50
         ${isDeleting ? 'animate-slide-out' : 'animate-fade-in-up'}
         ${todo.completed ? 'opacity-50' : ''}
       `}
@@ -59,13 +59,13 @@ export default function TodoItem({ todo, index, onDelete, onToggle, isDeleting }
         <p
           className={`
             font-mono text-sm truncate transition-colors duration-200
-            ${todo.completed ? 'line-through text-text-dim' : 'text-text'}
+            ${todo.completed ? 'line-through text-zinc-500' : 'text-zinc-100'}
           `}
         >
           {todo.text}
         </p>
         {todo.createdAt && (
-          <p className="text-[11px] font-mono text-text-dim mt-1 tracking-wide">
+          <p className="text-[11px] font-mono text-zinc-500 mt-1 tracking-wide">
             {getRelativeTime(todo.createdAt)}
           </p>
         )}
@@ -75,8 +75,8 @@ export default function TodoItem({ todo, index, onDelete, onToggle, isDeleting }
       <button
         onClick={() => onDelete(todo.id)}
         className="opacity-0 group-hover:opacity-100 transition-all duration-200
-                   text-text-dim hover:text-danger text-xs font-mono
-                   px-2 py-1 hover:bg-danger-muted rounded cursor-pointer"
+                   text-zinc-500 hover:text-red-500 text-xs font-mono
+                   px-2 py-1 hover:bg-red-500/10 rounded cursor-pointer"
         aria-label="Delete task"
       >
         DEL

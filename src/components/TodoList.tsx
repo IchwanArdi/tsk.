@@ -10,7 +10,7 @@ interface TodoListProps {
 
 export default function TodoList({ todos, onDeleteTodo, onToggleTodo, deletingId }: TodoListProps) {
   return (
-    <ul className="border-t border-border-subtle">
+    <ul className="border-t border-zinc-800/50">
       {todos.map((todo, index) => (
         <TodoItem
           key={todo.id}
